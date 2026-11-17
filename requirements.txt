@@ -2,5 +2,6 @@ fastapi "uvicorn[standard]"
 pydantic
 pandas
 pickle
+scikit-learn==1.6.1
 
 
