@@ -2,6 +2,8 @@
 
 // useState lets us display the result on the page.
 import { useEffect, useState } from "react";
+// Use the same artwork as app/icon.svg and the browser favicon.
+import Image from "next/image";
 
 // Scroll only when the focused control is outside the visible area (including the keyboard).
 function keepFieldVisible() {
@@ -77,7 +79,11 @@ export default function Home() {
   return (
     <main className="page">
       <header>
-        <span className="eyebrow">INSURANCE PREMIUM ESTIMATOR</span>
+        {/* Shared logo and app name above the form. */}
+        <div className="brand">
+          
+          <span className="eyebrow">INSURANCE PREMIUM ESTIMATOR</span>
+        </div>
         <h1>A little detail. A clearer picture.</h1>
         <p>Fill in your details to see your BMI and predicted insurance premium category.</p>
       </header>

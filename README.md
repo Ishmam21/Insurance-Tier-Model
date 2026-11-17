@@ -9,11 +9,7 @@ A local machine learning demo for learners that predicts low, medium, or high in
 
 Runs locally; this repository has no hosted demo.
 
-<!-- HERO SCREENSHOT: Save a desktop screenshot of the completed form, live BMI,
-and a successful premium prediction to docs/screenshots/desktop.png.
-Then uncomment the image below. Use dummy details only.
 <img src="docs/screenshots/desktop.png" alt="Dark insurance estimator showing a completed form, calculated BMI, and predicted premium category" width="960" />
--->
 
 ## Contents
 
@@ -69,22 +65,16 @@ The browser calculates BMI for immediate display. FastAPI independently calculat
 
 ## Screenshots
 
-<!-- SCREENSHOT INSTRUCTIONS:
-1. Create docs/screenshots/ in the repository.
-2. desktop.png: Whole desktop page with dummy inputs, BMI, and a successful prediction.
-   This also serves as the hero image near the top.
-3. mobile.png: Narrow/mobile view showing the stacked form and summary cards.
-4. prediction.png: Close-up of the BMI and premium result after a successful request.
-5. api-docs.png: FastAPI /docs with POST /predict expanded and a 200 response visible.
-6. Uncomment the table below after adding the files. Paths are relative to this README.
+### BMI and premium prediction
 
-| Mobile layout | BMI and premium prediction |
-| --- | --- |
-| <img src="docs/screenshots/mobile.png" alt="Mobile insurance form with stacked input and summary cards" width="300" /> | <img src="docs/screenshots/prediction.png" alt="Calculated BMI and a successful insurance premium category prediction" width="440" /> |
+<img src="docs/screenshots/prediction.png" alt="Calculated BMI and a successful insurance premium category prediction" width="640" />
 
 ### FastAPI documentation
-<img src="docs/screenshots/api-docs.png" alt="FastAPI Swagger UI showing the predict endpoint and a successful JSON response" width="960" />
--->
+
+| API documentation — view 1 | API documentation — view 2 |
+| --- | --- |
+| <img src="docs/screenshots/api-docs-1.png" alt="First view of the FastAPI prediction endpoint documentation" width="440" /> | <img src="docs/screenshots/api-docs-2.png" alt="Second view of the FastAPI prediction endpoint documentation" width="440" /> |
+
 
 ## Tech stack
 

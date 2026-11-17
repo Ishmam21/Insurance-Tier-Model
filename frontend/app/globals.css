@@ -10,6 +10,9 @@ body {
 }
 .page { max-width: 1040px; margin: 0 auto; padding: 56px 24px; }
 header { margin-bottom: 32px; }
+/* Keep the logo aligned with the name, including on narrow screens. */
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand img { flex-shrink: 0; }
 .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 1.6px; color: #a8adb4; }
 h1 { font-size: clamp(26px, 4vw, 36px); line-height: 1.2; letter-spacing: -1px; margin: 12px 0; }
 h2 { font-size: 19px; margin: 0 0 24px; }
