@@ -1,13 +1,15 @@
 # Insurance Premium Estimator
 
-A local machine learning demo for learners that predicts low, medium, or high insurance premium categories through a Next.js form and FastAPI backend.
+A machine learning demo for learners that predicts low, medium, or high insurance premium categories through a Next.js form and FastAPI backend.
 
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
 ![Next.js](https://img.shields.io/badge/Next.js-000000?logo=nextdotjs&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?logo=scikitlearn&logoColor=white)
 
-Runs locally; this repository has no hosted demo.
+**[Live demo](https://insurance-tier-model.vercel.app/)** · **[Live API docs](https://insurance-tier-model.onrender.com/docs)**
+
+Frontend hosted on Vercel · FastAPI backend hosted on Render.
 
 <img src="docs/screenshots/desktop.png" alt="Dark insurance estimator showing a completed form, calculated BMI, and predicted premium category" width="960" />
 
@@ -18,6 +20,7 @@ Runs locally; this repository has no hosted demo.
 - [Screenshots](#screenshots)
 - [Tech stack](#tech-stack)
 - [Run locally](#run-locally)
+- [Deployment](#deployment)
 - [Prediction API](#prediction-api)
 - [Training and model](#training-and-model)
 - [Limitations](#limitations)
@@ -88,6 +91,7 @@ The browser calculates BMI for immediate display. FastAPI independently calculat
 | Machine learning | scikit-learn, OneHotEncoder, RandomForestClassifier |
 | Model storage | Python pickle file |
 | Training workflow | Jupyter notebook / Google Colab |
+| Hosting | Vercel (frontend), Render (backend) |
 
 ## Run locally
 
@@ -126,10 +130,24 @@ Open [http://localhost:3000](http://localhost:3000), fill in the form, and selec
 
 ### Local configuration
 
-- The frontend calls `http://localhost:8000/predict` in `frontend/app/page.tsx`.
-- FastAPI allows requests from `http://localhost:3000` through CORS in `main.py`.
-- If either port changes, update these settings together. Use `localhost:3000` for the frontend to match the allowed origin.
+- The frontend currently calls the hosted Render API. To use your local backend, change the `fetch` URL in `frontend/app/page.tsx` to `http://localhost:8000/predict`.
+- FastAPI allows both `http://localhost:3000` and the deployed Vercel frontend through CORS in `main.py`.
+- If you change a local port, update the API URL or allowed origin accordingly. Open the local frontend using `localhost:3000` to match the allowed origin.
 - No API keys or `.env` files are required. Keep any future credentials in ignored environment files; commit only templates with dummy values. Browser-side code must never contain private keys.
+
+## Deployment
+
+Both services deploy from the same GitHub repository, using `main`.
+
+| Setting | Render backend | Vercel frontend |
+| --- | --- | --- |
+| Root directory | Repository root (leave blank) | `frontend` |
+| Runtime / framework | Python | Next.js |
+| Build command | `pip install -r requirements.txt` | `npm run build` |
+| Start command | `uvicorn main:app --host 0.0.0.0 --port $PORT` | Managed by Vercel |
+| Public URL | https://insurance-tier-model.onrender.com | https://insurance-tier-model.vercel.app |
+
+The frontend sends predictions to `https://insurance-tier-model.onrender.com/predict`. Keep the frontend API URL and FastAPI's allowed CORS origins in sync if either deployment URL changes. The backend root `/` has no route; use `/docs` to explore and test the API.
 
 ## Prediction API
 
