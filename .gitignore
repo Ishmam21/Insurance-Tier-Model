@@ -1,0 +1,29 @@
+# Local Python environments and generated caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Installed frontend packages and build output
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+
+# Local secrets; commit only templates containing dummy values
+.env
+.env.*
+!.env.example
+!.env.sample
+*.pem
+*.key
+*.p12
+.aws/
+
+# OS files and local logs
+.DS_Store
+*.log

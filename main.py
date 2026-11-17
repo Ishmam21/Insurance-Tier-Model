@@ -22,14 +22,13 @@ app.add_middleware(
 
 
 
-tier_1_cities = ["Mumbai", "Delhi", "Bangalore", "Chennai", "Kolkata", "Hyderabad", "Pune"]
+# App-specific Bangladesh city tiers; these are not an official classification.
+# List each city once; alternate spellings are normalized below.
+tier_1_cities = ["Dhaka", "Chattogram", "Gazipur", "Narayanganj"]
 tier_2_cities = [
-    "Jaipur", "Chandigarh", "Indore", "Lucknow", "Patna", "Ranchi", "Visakhapatnam", "Coimbatore",
-    "Bhopal", "Nagpur", "Vadodara", "Surat", "Rajkot", "Jodhpur", "Raipur", "Amritsar", "Varanasi",
-    "Agra", "Dehradun", "Mysore", "Jabalpur", "Guwahati", "Thiruvananthapuram", "Ludhiana", "Nashik",
-    "Allahabad", "Udaipur", "Aurangabad", "Hubli", "Belgaum", "Salem", "Vijayawada", "Tiruchirappalli",
-    "Bhavnagar", "Gwalior", "Dhanbad", "Bareilly", "Aligarh", "Gaya", "Kozhikode", "Warangal",
-    "Kolhapur", "Bilaspur", "Jalandhar", "Noida", "Guntur", "Asansol", "Siliguri"
+    "Sylhet", "Khulna", "Rajshahi", "Barishal", "Rangpur", "Mymensingh",
+    "Cumilla", "Bogura", "Jashore", "Savar",
+    "Tangail", "Faridpur", "Kushtia", "Feni", "Noakhali", "Cox's Bazar",
 ]
 
 #pydantic modle for validation
@@ -61,9 +60,15 @@ class UserInput(BaseModel):
     @computed_field
     @property
     def city_tier(self)->int:
-        if self.city in tier_1_cities:
+        # Accept extra spaces and any capitalization, e.g. " dhaka ".
+        city = self.city.strip().casefold()
+        # Old and current spellings refer to the same city, not separate tiers.
+        aliases = {"chittagong": "chattogram", "barisal": "barishal",
+                   "comilla": "cumilla", "bogra": "bogura", "jessore": "jashore"}
+        city = aliases.get(city, city)
+        if city in [name.casefold() for name in tier_1_cities]:
             return 1
-        elif self.city in tier_2_cities:
+        elif city in [name.casefold() for name in tier_2_cities]:
             return 2
         else:
             return 3

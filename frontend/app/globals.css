@@ -1,121 +1,73 @@
-* {
-  box-sizing: border-box;
-}
-
+/* Dark colors and a standard system font throughout the page. */
+* { box-sizing: border-box; }
+:root { color-scheme: dark; }
 body {
   margin: 0;
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 32px 16px;
-  background: #101010;
-  color: #f5f5f5;
+  background: #101112;
+  color: #eeeeef;
   font-family: Arial, Helvetica, sans-serif;
-}
-
-.card {
-  width: min(100%, 600px);
-  padding: 32px;
-  background: #191919;
-  border: 1px solid #303030;
-  border-radius: 12px;
-}
-
-h1 {
-  margin: 0 0 8px;
-  font-size: 24px;
-}
-
-header p {
-  margin: 0 0 28px;
-  color: #aaa;
-  font-size: 14px;
   line-height: 1.5;
 }
+.page { max-width: 1040px; margin: 0 auto; padding: 56px 24px; }
+header { margin-bottom: 32px; }
+.eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 1.6px; color: #a8adb4; }
+h1 { font-size: clamp(26px, 4vw, 36px); line-height: 1.2; letter-spacing: -1px; margin: 12px 0; }
+h2 { font-size: 19px; margin: 0 0 24px; }
+p { font-size: 14px; color: #a8adb4; }
+header p { margin: 0; }
 
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px 16px;
-}
+/* The form and summary sit next to each other on larger screens. */
+.workspace { display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; align-items: start; }
+.card { padding: 28px; background: #191b1e; border: 1px solid #303337; border-radius: 12px; }
+.form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 16px; }
+.field { display: flex; flex-direction: column; gap: 8px; }
+label, legend { font-size: 13px; color: #d1d4d8; }
 
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-label, legend {
-  font-size: 14px;
-  color: #e0e0e0;
-}
-
+/* Give every text field and dropdown the same dimensions and focus style. */
 .field input, select {
-  width: 100%;
-  min-height: 44px;
-  padding: 10px 12px;
-  border: 1px solid #444;
-  border-radius: 6px;
-  background: #242424;
-  color: #f5f5f5;
-  font: inherit;
+  width: 100%; min-height: 46px; padding: 10px 12px;
+  border: 1px solid #3c4046; border-radius: 6px;
+  background: #111315; color: #f2f2f2; font: inherit; font-size: 14px;
 }
-
-input::placeholder {
-  color: #888;
-}
-
+input::placeholder { color: #777f89; }
+/* Leave breathing room when the browser scrolls a focused control into view. */
+input, select, button { scroll-margin-block: 24px; }
 input:focus-visible, select:focus-visible, button:focus-visible {
-  outline: 2px solid #ddd;
-  outline-offset: 2px;
+  outline: 2px solid #c5d3df; outline-offset: 3px;
 }
+fieldset { margin: 24px 0; padding: 0; border: 0; }
+.radio-group { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; }
+.radio-option { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border: 1px solid #3c4046; border-radius: 6px; cursor: pointer; }
+.radio-option:has(input:checked) { background: #292d32; border-color: #a8adb4; }
+.radio-option input { margin: 0; accent-color: #ddd; }
+button { width: 100%; padding: 13px; border: 0; border-radius: 6px; background: #e8ebee; color: #111315; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
+button:hover { background: #fff; }
+button:disabled { opacity: .6; cursor: wait; }
+.error { color: #ffb6b6; margin-bottom: 0; }
 
-fieldset {
-  margin: 24px 0;
-  padding: 0;
-  border: 0;
+/* The summary shows a live BMI and a clearly labeled premium category. */
+.summary { display: grid; gap: 20px; }
+.bmi-value { font-size: 56px; font-weight: 600; letter-spacing: -2px; line-height: 1.2; margin-top: 16px; font-variant-numeric: tabular-nums; }
+.bmi-card p { margin: 12px 0 20px; }
+.formula, .result-note { display: block; font-size: 12px; color: #a8adb4; }
+.formula { border-top: 1px solid #303337; padding-top: 16px; }
+.result-card h2 { margin: 18px 0 10px; font-size: 26px; line-height: 1.25; }
+.result-card p { margin: 0 0 20px; }
+.result-card.low { border-color: #446958; }
+.result-card.low h2 { color: #a2d6b6; }
+.result-card.medium { border-color: #78643d; }
+.result-card.medium h2 { color: #e2c78f; }
+.result-card.high { border-color: #7c4b4b; }
+.result-card.high h2 { color: #edaaaa; }
+
+/* Stack the cards on small screens without squeezing the inputs. */
+@media (max-width: 760px) {
+  .workspace { grid-template-columns: 1fr; }
+  .page { padding: 32px 16px; }
+  /* Keep mobile browsers from zooming into small text when a field gets focus. */
+  .field input, select { font-size: 16px; }
 }
-
-.radio-group {
-  display: flex;
-  gap: 24px;
-  margin-top: 12px;
-}
-
-.radio-option {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-}
-
-.radio-option input {
-  margin: 0;
-  accent-color: #eee;
-}
-
-button {
-  width: 100%;
-  padding: 12px;
-  border: 0;
-  border-radius: 6px;
-  background: #f0f0f0;
-  color: #171717;
-  font: inherit;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #d8d8d8;
-}
-
-@media (max-width: 480px) {
-  .card {
-    padding: 24px;
-  }
-
-  .form-grid {
-    grid-template-columns: 1fr;
-  }
+@media (max-width: 420px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .card { padding: 22px; }
 }
